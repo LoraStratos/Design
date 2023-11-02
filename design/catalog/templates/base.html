@@ -10,18 +10,19 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body>
-  <div>{% block content %}{% endblock %}</div>
-  <div>
+<body style="display: flex;">
+  <div style="margin: 20px 40px 0 20px;">
     {% block sidebar %}
       <nav>
         <p><a href="{% url 'index' %}">Главная</a></p>
         {% if user.is_authenticated %}
           <p><a href="">Личный кабинет</a></p>
+          <p><a href="{% url 'logout' %}"></a></p>
         {% else %}
-          <p><a href="">Войти</a> или <a href="">Зарегистрироваться</a></p>
+          <p><a href="{% url 'login' %}">Войти</a> или <a href="{% url 'registration' %}">Зарегистрироваться</a></p>
         {% endif %}
       </nav>
     {% endblock %}
   </div>
+  <div>{% block content %}{% endblock %}</div>
 </body>
