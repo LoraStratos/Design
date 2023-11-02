@@ -9,22 +9,19 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  {% load static %}
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
 </head>
 <body>
+  <div>{% block content %}{% endblock %}</div>
   <div>
     {% block sidebar %}
-      <ul class="sidebar-nav">
-        <li><a href="">Главная</a></li>
+      <nav>
+        <p><a href="{% url 'index' %}">Главная</a></p>
         {% if user.is_authenticated %}
-          <li><a href="">Личный кабинет</a></li>
+          <p><a href="">Личный кабинет</a></p>
         {% else %}
-          <li><a href="">Войти</a> или <a href="">Зарегистрироваться</a></li>
-          <li><a href="">Зарегистрироваться</a></li>
+          <p><a href="">Войти</a> или <a href="">Зарегистрироваться</a></p>
         {% endif %}
-      </ul>
+      </nav>
     {% endblock %}
-    <div>{% block content %}{% endblock %}</div>
   </div>
 </body>

@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Application(models.Model):
     title = models.CharField(max_length=200)
-    summary = models.TextField(max_length=1000, help_text="Опишите свою заявку здесь")
+    summary = models.TextField(help_text="Опишите свою заявку")
 
 class Category(models.Model):
     name = models.CharField(max_length=100, help_text="Введите категорию")
