@@ -16,10 +16,10 @@
       <nav>
         <p><a href="{% url 'index' %}">Главная</a></p>
         {% if user.is_authenticated %}
-          <p><a href="">Личный кабинет</a></p>
-          <p><a href="{% url 'logout' %}"></a></p>
+          <p><a href="{% url 'profile' %}">Личный кабинет</a></p>
+          <p><a href="{% url 'logout' %}?next={{ request.path }}">Выйти</a></p>
         {% else %}
-          <p><a href="{% url 'login' %}">Войти</a> или <a href="{% url 'registration' %}">Зарегистрироваться</a></p>
+          <p><a href="{% url 'login' %}?next={{ request.path }}">Войти</a> или <a href="{% url 'registration' %}">Зарегистрироваться</a></p>
         {% endif %}
       </nav>
     {% endblock %}
