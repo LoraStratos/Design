@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from .models import CustomUser
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django import forms
@@ -6,11 +6,17 @@ from django import forms
 from .validators import validate_password_len
 
 class RegisterUserForm(forms.ModelForm):
-    full_name = forms.CharField(
-        label='ФИО',
+    first_name = forms.CharField(
+        label='Имя',
         validators=[RegexValidator('^[а-яА-Я- -]+$',
         message="Разрешены только кириллица, дефис и пробелы")],
         error_messages={'required': 'Обязательное поле',}
+    )
+    last_name = forms.CharField(
+        label='Фамилия',
+        validators=[RegexValidator('^[а-яА-Я- -]+$',
+        message="Разрешены только кириллица, дефис и пробелы")],
+        error_messages={'required': 'Обязательное поле', }
     )
     username = forms.CharField(
         label='Логин',
@@ -56,5 +62,5 @@ class RegisterUserForm(forms.ModelForm):
         return user
 
     class Meta:
-        model = User
-        fields = ('full_name', 'username', 'email', 'password', 'password2', 'rules')
+        model = CustomUser
+        fields = ('first_name', 'last_name', 'username', 'email', 'password', 'password2', 'rules')
