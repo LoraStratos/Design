@@ -11,8 +11,9 @@ from .models import Application
 def index(request):
     return render(request, 'index.html')
 
-def registration(request):
-    return render(request, 'registration/registration.html')
+def logout(request):
+    return render(request, 'registration/logout.html')
+
 
 def profile(request):
     return render(request, 'profile.html')
@@ -21,6 +22,9 @@ class RegisterView(CreateView):
     template_name = 'registration/registration.html'
     form_class = RegisterUserForm
     success_url = reverse_lazy('login')
+
+    def registration(request):
+        return render(request, 'registration/registration.html')
 
 def validate_username(request):
     username = request.GET.get('username', None)

@@ -2,7 +2,8 @@ from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
 from django.db import models
-from django.utils.crypto import get_random_string
+from django.urls import reverse
+
 
 class CustomUser(AbstractUser):
     first_name = models.CharField(max_length=255, verbose_name='Имя', unique=True, blank=False)
@@ -19,8 +20,6 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-def get_name_file(filename):
-    return '/'.join([get_random_string(length=5) + '_' + filename])
 
 class Application(models.Model):
     STATUS_CHOICES = [
@@ -30,7 +29,7 @@ class Application(models.Model):
     ]
     title = models.CharField(max_length=200)
     description = models.TextField(help_text="Введите краткое описание заявки")
-    category = models.ManyToManyField(Category, help_text="Выберите категорию заявки")
+    category = models.ForeignKey(Category, help_text="Выберите категорию заявки", on_delete=models.CASCADE)
 
     def validate_image(fieldfile_obj):
         filesize = fieldfile_obj.file.size
@@ -42,3 +41,9 @@ class Application(models.Model):
     status = models.CharField(max_length=254, verbose_name='Статус', choices=STATUS_CHOICES, default='N')
     date = models.DateTimeField(verbose_name='Дата добавления')
     user = models.ForeignKey(CustomUser, verbose_name='Пользователь', on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        return reverse('application_list', args=[str(self.id)])
+
+    def __str__(self):
+        return self.title

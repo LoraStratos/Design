@@ -8,20 +8,17 @@ from .validators import validate_password_len
 class RegisterUserForm(forms.ModelForm):
     first_name = forms.CharField(
         label='Имя',
-        validators=[RegexValidator('^[а-яА-Я- -]+$',
-        message="Разрешены только кириллица, дефис и пробелы")],
+        validators=[RegexValidator('^[а-яА-Я- -]+$', message="Разрешены только кириллица, дефис и пробелы")],
         error_messages={'required': 'Обязательное поле',}
     )
     last_name = forms.CharField(
         label='Фамилия',
-        validators=[RegexValidator('^[а-яА-Я- -]+$',
-        message="Разрешены только кириллица, дефис и пробелы")],
+        validators=[RegexValidator('^[а-яА-Я- -]+$', message="Разрешены только кириллица, дефис и пробелы")],
         error_messages={'required': 'Обязательное поле', }
     )
     username = forms.CharField(
         label='Логин',
-        validators=[RegexValidator('^[a-zA-Z0-9-]+$',
-        message="Разрешены только латиница, цифры или тире")],
+        validators=[RegexValidator('^[a-zA-Z0-9-]+$', message="Разрешены только латиница, цифры или тире")],
         error_messages={'required': 'Обязательное поле', 'unique': 'Данный логин занят'}
     )
     email = forms.EmailField(
@@ -51,7 +48,7 @@ class RegisterUserForm(forms.ModelForm):
         password2 = self.cleaned_data.get('password2')
         if password and password2 and password != password2:
             raise ValidationError({
-                'password2': ValidationError('Введенные пароли не совпадают', сode='password_mismatch')
+                'password2': ValidationError('Введенные пароли не совпадают')
             })
 
     def save(self, commit=True):

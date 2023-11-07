@@ -127,7 +127,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 runserver.default_port = "8080"
 
 LOGIN_REDIRECT_URL = '/profile'
-REGISTRATION_REDIRECT_URL = '/profile'
-LOGOUT_REDIRECT_URL = '/logout'
+
+LOGOUT_REDIRECT_URL = '/'
 
 AUTH_USER_MODEL = 'catalog.CustomUser'
+
+MEDIA_URL = 'images/'
