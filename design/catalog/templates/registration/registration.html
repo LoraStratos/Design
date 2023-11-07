@@ -5,7 +5,7 @@
     <form method="post">
     {{ form.as_p }}
     {% csrf_token %}
-    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+    <button type="submit">Зарегистрироваться</button>
     </form>
     <script>
             document.querySelector('#id_username').addEventListener('blur', async (event) => {
