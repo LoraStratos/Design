@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -10,6 +11,9 @@ from .models import Application
 
 def index(request):
     return render(request, 'index.html')
+
+def my_application(request):
+    return render(request, 'my_application.html')
 
 def logout(request):
     return render(request, 'registration/logout.html')
@@ -33,7 +37,7 @@ def validate_username(request):
     }
     return JsonResponse(response)
 
-class ApplicationView(generic.ListView):
+class ApplicationView(LoginRequiredMixin, generic.ListView):
     model = Application
     paginate_by = 4
     template_name = 'profile.html'
@@ -41,4 +45,3 @@ class ApplicationView(generic.ListView):
 
     def get_queryset(self):
         return Application.objects.filter(user=self.request.user)
-

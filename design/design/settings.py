@@ -132,4 +132,3 @@ LOGOUT_REDIRECT_URL = '/'
 
 AUTH_USER_MODEL = 'catalog.CustomUser'
 
-MEDIA_URL = 'images/'
