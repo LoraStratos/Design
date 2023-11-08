@@ -15,12 +15,6 @@ def index(request):
 def my_application(request):
     return render(request, 'my_application.html')
 
-def logout(request):
-    return render(request, 'registration/logout.html')
-
-
-def profile(request):
-    return render(request, 'profile.html')
 
 class RegisterView(CreateView):
     template_name = 'registration/registration.html'
