@@ -12,5 +12,5 @@ urlpatterns = [
     path('registration/', views.RegisterView.as_view(), name='registration'),
     path('validate_username', validate_username, name='validate_username'),
     path('profile/', views.ApplicationView.as_view(), name='profile'),
-] + static(settings.MEDIA_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

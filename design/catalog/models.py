@@ -29,7 +29,7 @@ class Application(models.Model):
     ]
     title = models.CharField(max_length=200)
     description = models.TextField(help_text="Введите краткое описание заявки")
-    category = models.ForeignKey(Category, help_text="Выберите категорию заявки", on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, help_text="Выберите категорию заявки", on_delete=models.CASCADE, default='0')
 
     def validate_image(fieldfile_obj):
         filesize = fieldfile_obj.file.size
