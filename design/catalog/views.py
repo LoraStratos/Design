@@ -9,8 +9,6 @@ from .forms import RegisterUserForm
 from .models import Application
 
 
-def index(request):
-    return render(request, 'index.html')
 
 def my_application(request):
     return render(request, 'my_application.html')
@@ -31,7 +29,7 @@ def validate_username(request):
     }
     return JsonResponse(response)
 
-class ApplicationView(LoginRequiredMixin, generic.ListView):
+class ApplicationViewUser(LoginRequiredMixin, generic.ListView):
     model = Application
     paginate_by = 4
     template_name = 'profile.html'
@@ -39,3 +37,16 @@ class ApplicationView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         return Application.objects.filter(user=self.request.user)
+
+class ApplicationViewIndex(generic.ListView):
+    model = Application
+    paginate_by = 4
+    template_name = 'index.html'
+    context_object_name = 'applications'
+
+    def get_queryset(self):
+        return Application.objects.filter(status='C')
+
+    def index(request):
+        num_applications = Application.objects.filter(status='P').count()
+        return render(request, 'index.html', context={'num_application': num_applications})

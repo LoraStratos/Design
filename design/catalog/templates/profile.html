@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% if user.is_authenticated %}
         <h1>Личный кабинет {{ user }}</h1>
+        <h3>Последние заявки</h3>
         {% for application in applications %}
             <p>Временная метка: {{ application.date }}</p>
             <p>Название: {{ application.title }}</p>
@@ -10,7 +10,6 @@
             <p>Статус: {{ application.get_status_display }}</p>
             <p><img src="{{ application.photo_file.url }}"></p>
         {% endfor %}
-    {% endif %}
 
     {% block pagination %}
         {% if is_paginated %}
