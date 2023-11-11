@@ -5,6 +5,7 @@ from django.db import models
 from django.urls import reverse
 
 
+
 class CustomUser(AbstractUser):
     first_name = models.CharField(max_length=255, verbose_name='Имя', unique=True, blank=False)
     last_name = models.CharField(max_length=255, verbose_name='Фамилия', unique=True, blank=False)
@@ -39,7 +40,7 @@ class Application(models.Model):
 
     photo_file = models.ImageField(max_length=254, upload_to='image/', validators=[validate_image, FileExtensionValidator(['jpg', 'jpeg', 'png', 'bmp'])])
     status = models.CharField(max_length=254, verbose_name='Статус', choices=STATUS_CHOICES, default='N')
-    date = models.DateTimeField(verbose_name='Дата добавления')
+    date = models.DateTimeField(verbose_name='Дата добавления', null=True, auto_now_add=True)
     user = models.ForeignKey(CustomUser, verbose_name='Пользователь', on_delete=models.CASCADE)
 
     def get_absolute_url(self):

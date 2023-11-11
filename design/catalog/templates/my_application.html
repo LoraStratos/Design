@@ -9,7 +9,7 @@
             <p>Статус: {{ application.get_status_display }}</p>
             <p><img src="{{ application.photo_file.url }}" style="height: 300px; width: 300px"></p>
             {% if application.status == 'N' %}
-                <a href="{% url 'delete' application.id %}" style="color: red;">Удалить</a>
+                <a href="{% url 'delete' application.id %}" style="color: red;">Удалить</a><br>
             {% endif %}
         {% endfor %}
 
