@@ -12,5 +12,6 @@ urlpatterns = [
     path('profile/', profile, name='profile'),
     path('create/', ApplicationCreate.as_view(), name='create'),
     path('request/<pk>/delete/', ApplicationDelete.as_view(), name='delete'),
+    path('admin_base/', admin_base, name='admin_base'),
 ]
 

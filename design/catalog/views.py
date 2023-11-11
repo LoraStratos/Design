@@ -76,3 +76,6 @@ class ApplicationDelete(DeleteView):
         if application:
             application.delete()
         return redirect('my_application')
+
+def admin_base(request):
+    return render(request, 'admin_base.html')
