@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Создание категории</h1>
+    <form action="{% url 'create_category' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table><br>
+        <input type="submit" value="Создать">
+    </form>
+{% endblock %}

@@ -1,4 +1,4 @@
-from .models import CustomUser
+from .models import CustomUser, Application
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django import forms
@@ -61,3 +61,26 @@ class RegisterUserForm(forms.ModelForm):
     class Meta:
         model = CustomUser
         fields = ('first_name', 'last_name', 'username', 'email', 'password', 'password2', 'rules')
+
+class ChangeStatusApplication(forms.ModelForm):
+    comment = forms.CharField(required=False)
+    img = forms.ImageField(required=False)
+    class Meta:
+        model = Application
+        fields = ['status', 'img', 'comment']
+
+    def clean(self):
+        cleaned_data = super().clean()
+        new_status = cleaned_data.get('status')
+
+        if new_status == 'Выполнено':
+            img = cleaned_data.get('img')
+            if not img:
+                raise forms.ValidationError("При смене статуса на 'Выполнено' необходимо прикрепить изображение дизайна")
+
+        if new_status == 'Принято в работу':
+            comment = cleaned_data.get('comment')
+            if not comment:
+                raise forms.ValidationError("При смене статуса на 'Принято в работу' необходимо указать комментарий")
+
+        return cleaned_data

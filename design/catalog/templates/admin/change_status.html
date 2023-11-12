@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Изменение статуса</h1>
+    <form action="{% url 'change_status' application.id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+        <button type="submit">Сохранить</button>
+    </form>
+{% endblock %}

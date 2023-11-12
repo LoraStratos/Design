@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+    <h1>Категории заявок</h1>
+    <a href="{% url 'create_category' %}">Создать</a><br><br>
+    {% for category in category %}
+        <p>{{ category.name }}</p>
+        <p><a href="{% url 'delete_category' category.id %}" style="color: red;">Удалить</a></p><br>
+    {% endfor %}
 {% endblock %}
