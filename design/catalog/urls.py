@@ -12,6 +12,9 @@ urlpatterns = [
     path('profile/', profile, name='profile'),
     path('create/', ApplicationCreate.as_view(), name='create'),
     path('request/<pk>/delete/', ApplicationDelete.as_view(), name='delete'),
-    path('admin_base/', admin_base, name='admin_base'),
+
+    path('category/', CategoryView.as_view(), name='category'),
+    path('all_application/', ApplicationViewAdmin.as_view(), name='all_application'),
+    path('change_status/', ChangeStatus.as_view(), name='change_status'),
 ]
 

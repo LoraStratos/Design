@@ -4,10 +4,9 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic
-from django.views.generic import CreateView, DeleteView
+from django.views.generic import CreateView, DeleteView, UpdateView
 from .forms import RegisterUserForm
-from .models import Application
-
+from .models import Application, Category
 
 
 def profile(request):
@@ -19,8 +18,8 @@ class RegisterView(CreateView):
     form_class = RegisterUserForm
     success_url = reverse_lazy('login')
 
-    def registration(request):
-        return render(request, 'registration/registration.html')
+    def registration(self):
+        return render(self, 'registration/registration.html')
 
 def validate_username(request):
     username = request.GET.get('username', None)
@@ -47,9 +46,9 @@ class ApplicationViewIndex(generic.ListView):
     def get_queryset(self):
         return Application.objects.filter(status='C')
 
-    def index(request):
+    def index(self):
         num_applications = Application.objects.filter(status='P').count()
-        return render(request, 'index.html', context={'num_application': num_applications})
+        return render(self, 'index.html', context={'num_application': num_applications})
 
 
 class ApplicationCreate(LoginRequiredMixin, CreateView):
@@ -62,8 +61,8 @@ class ApplicationCreate(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-    def create_application(request):
-        return render(request, "create_application.html")
+    def create_application(self):
+        return render(self, "create_application.html")
 
 class ApplicationDelete(DeleteView):
     model = Application
@@ -77,5 +76,22 @@ class ApplicationDelete(DeleteView):
             application.delete()
         return redirect('my_application')
 
-def admin_base(request):
-    return render(request, 'admin_base.html')
+class ApplicationViewAdmin(generic.ListView):
+    model = Application
+    paginate_by = 4
+    template_name = 'admin/all_application.html'
+    context_object_name = 'applications'
+
+    def get_queryset(self):
+        return Application.objects.order_by('-date')
+
+class CategoryView(generic.ListView):
+    model = Category
+    template_name = 'admin/category.html'
+    context_object_name = 'category'
+
+class ChangeStatus(UpdateView):
+
+
+    def category(self):
+        return render(self, 'admin/category.html')

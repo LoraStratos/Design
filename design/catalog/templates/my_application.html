@@ -9,7 +9,7 @@
             <p>Статус: {{ application.get_status_display }}</p>
             <p><img src="{{ application.photo_file.url }}" style="height: 300px; width: 300px"></p>
             {% if application.status == 'N' %}
-                <a href="{% url 'delete' application.id %}" style="color: red;">Удалить</a><br>
+                <a href="{% url 'delete' application.id %}" style="color: red;">Удалить заявку</a><br>
             {% endif %}
         {% endfor %}
 
@@ -20,9 +20,7 @@
                     {% if page_obj.has_previous%}
                         <a href="{{request.path}}?page={{page_obj.previous_page_number}}"><--</a>
                     {% endif %}
-                    <span class="page-current">
-                    Страница {{page_obj.number}} из {{page_obj.paginator.num_pages}}.
-                    </span>
+                    <span class="page-current">Страница {{page_obj.number}} из {{page_obj.paginator.num_pages}}.</span>
                     {% if page_obj.has_next %}
                         <a href="{{request.path}}?page={{page_obj.next_page_number}}">--></a>
                     {% endif %}

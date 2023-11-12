@@ -4,8 +4,4 @@
      <h1>Личный кабинет {{ user }}</h1>
      <p><a href="{% url 'create' %}">Создать заявку</a></p>
      <p><a href="{% url 'my_application' %}">Мои заявки</a></p>
-     <br><br>
-     {% if user.is_superuser %}
-          <p><a href="{% url 'admin_base' %}">Перейти на страницу админа</a></p>
-     {% endif %}
 {% endblock %}
