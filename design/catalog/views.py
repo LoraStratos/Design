@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import CreateView, DeleteView, UpdateView
-from .forms import RegisterUserForm, ChangeStatusApplication
+from .forms import RegisterUserForm, ChangeStatus
 from .models import Application, Category
 
 
@@ -92,12 +92,10 @@ class CategoryView(generic.ListView):
 
 class ChangeStatus(UpdateView):
     model = Application
-    form_class = ChangeStatusApplication
+    form_class = ChangeStatus
     template_name = 'admin/change_status.html'
     success_url = reverse_lazy('all_application')
 
-    def change_status(self):
-        return render(self, 'admin/change_status.html')
 
 class CategoryDelete(DeleteView):
     model = Category

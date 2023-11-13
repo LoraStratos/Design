@@ -6,7 +6,7 @@
             <p>Временная метка: {{ application.date }}</p>
             <p>Название: {{ application.title }}</p>
             <p>Категория: {{ application.category }}</p>
-            <p>Статус: {{ application.get_status_display }}</p>
+            <p>Статус: {{ application.get_status_display }}      <a href="{% url 'change_status' application.id %}">Изменить</a></p>
             <p><img src="{{ application.photo_file.url }}" style="height: 300px; width: 300px"></p>
             {% if application.status == 'N' %}
                 <a href="{% url 'delete_ap' application.id %}" style="color: red;">Удалить заявку</a><br>

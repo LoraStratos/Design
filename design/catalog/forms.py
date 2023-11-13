@@ -62,25 +62,26 @@ class RegisterUserForm(forms.ModelForm):
         model = CustomUser
         fields = ('first_name', 'last_name', 'username', 'email', 'password', 'password2', 'rules')
 
-class ChangeStatusApplication(forms.ModelForm):
+class ChangeStatus(forms.ModelForm):
     comment = forms.CharField(required=False)
     img = forms.ImageField(required=False)
-    class Meta:
-        model = Application
-        fields = ['status', 'img', 'comment']
 
     def clean(self):
         cleaned_data = super().clean()
         new_status = cleaned_data.get('status')
 
-        if new_status == 'Выполнено':
+        if new_status == 'C':
             img = cleaned_data.get('img')
             if not img:
                 raise forms.ValidationError("При смене статуса на 'Выполнено' необходимо прикрепить изображение дизайна")
 
-        if new_status == 'Принято в работу':
+        if new_status == 'P':
             comment = cleaned_data.get('comment')
             if not comment:
                 raise forms.ValidationError("При смене статуса на 'Принято в работу' необходимо указать комментарий")
 
         return cleaned_data
+
+    class Meta:
+        model = Application
+        fields = ['status', 'img', 'comment']
