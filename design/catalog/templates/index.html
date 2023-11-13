@@ -11,7 +11,7 @@
                 <p>Название: {{ application.title }}</p>
                 <p>Категория: {{ application.category }}</p>
                 <p>Статус: {{ application.get_status_display }}</p>
-                <p><img src="{{ application.photo_file.url }}"></p>
+                <p><img src="{{ application.photo_file.url }}" style="height: 300px; width: 300px"></p>
             {% endfor %}
     {% endif %}
 
